@@ -32,13 +32,29 @@ exports.getDashboard = async (req, res) => {
             FROM accounts;
         `);
 
-        res.json({
+        const d = result.rows[0];
 
-            success: true,
+res.json({
 
-            dashboard: result.rows[0]
+    success: true,
 
-        });
+    dashboard: {
+
+        totalAccounts: Number(d.total_accounts),
+
+        activeAccounts: Number(d.active_accounts),
+
+        soldAccounts: Number(d.sold_accounts),
+
+        unsoldAccounts: Number(d.unsold_accounts),
+
+        bannedAccounts: Number(d.banned_accounts),
+
+        totalRevenue: Number(d.total_revenue)
+
+    }
+
+});
 
     } catch (err) {
 
